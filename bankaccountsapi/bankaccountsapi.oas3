@@ -1,0 +1,846 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BankingApi",
+    "version": "v1",
+    "description": "To perform the CRUD operations for the accounts"
+  },
+  "servers": [],
+  "paths": {
+    "/getAllUsersBankAccountDetails": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "get Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "AccountNumber": 10021001687722,
+                      "AccountName": "malli",
+                      "IfscCode": "UTIB",
+                      "Address": [
+                        {
+                          "street": "County",
+                          "city": "Panaji",
+                          "state": "Goa",
+                          "country": "IND",
+                          "postCode": 700075
+                        }
+                      ],
+                      "RegisteredPhone": 9010035373,
+                      "AccountBalance": 1000000
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "get PriceFx Details",
+        "operationId": "getAllUsersBankAccountDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": "get Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "Message": "your account has been created successfully"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "get PriceFx Details",
+        "operationId": "postAllUsersBankAccountDetails",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": [
+                {
+                  "accountNumber": 10021001687722,
+                  "accountName": "malli",
+                  "ifscCode": "UTIB0001634",
+                  "address": [
+                    {
+                      "street": "County",
+                      "city": "Panaji",
+                      "state": "Goa",
+                      "country": "IND",
+                      "postCode": 700075
+                    }
+                  ],
+                  "registeredPhone": 9010035373,
+                  "accountBalance": 1000000
+                }
+              ],
+              "schema": {
+                "includePath": "datatypes/request/addAccountNumberrequestdataType.raml",
+                "type": "array",
+                "items": {
+                  "includePath": "datatypes/request/addAccountNumberrequestdataType.raml",
+                  "type": "object",
+                  "properties": {
+                    "accountNumber": {
+                      "type": "integer"
+                    },
+                    "accountName": {
+                      "minLength": 1,
+                      "maxLength": 20,
+                      "type": "string"
+                    },
+                    "ifscCode": {
+                      "type": "string"
+                    },
+                    "address": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "street": {
+                            "minLength": 1,
+                            "maxLength": 20,
+                            "type": "string"
+                          },
+                          "city": {
+                            "minLength": 1,
+                            "maxLength": 20,
+                            "type": "string"
+                          },
+                          "state": {
+                            "minLength": 1,
+                            "maxLength": 20,
+                            "type": "string"
+                          },
+                          "country": {
+                            "minLength": 1,
+                            "maxLength": 20,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "street",
+                          "city",
+                          "state",
+                          "country"
+                        ]
+                      }
+                    },
+                    "registeredPhone": {
+                      "type": "integer"
+                    },
+                    "accountBalance": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "accountNumber",
+                    "accountName",
+                    "ifscCode",
+                    "address",
+                    "registeredPhone",
+                    "accountBalance"
+                  ]
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          }
+        ]
+      }
+    },
+    "/getAllUsersBankAccountDetails/{accountNumber}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "get Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "AccountNumber": 10021001687722,
+                    "AccountName": "malli",
+                    "IfscCode": "UTIB",
+                    "Address": [
+                      {
+                        "street": "County",
+                        "city": "Panaji",
+                        "state": "Goa",
+                        "country": "IND",
+                        "postCode": 700075
+                      }
+                    ],
+                    "RegisteredPhone": 9010035373,
+                    "AccountBalance": 1000000
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "get Success Response",
+        "operationId": "getBankAccountDetailsByAccountNumber",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          }
+        ]
+      },
+      "put": {
+        "responses": {
+          "200": {
+            "description": "get Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "Message": "Dear User your details has been updated successfully"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "get Success Response",
+        "operationId": "updateBankAccountDetailsByAccountNumber",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "accountName": "malli",
+                "ifscCode": "UTIB0001634",
+                "address": [
+                  {
+                    "street": "County",
+                    "city": "Panaji",
+                    "state": "Goa",
+                    "country": "IND",
+                    "postCode": 700075
+                  }
+                ],
+                "registeredPhone": 9010035373,
+                "accountBalance": 1000000
+              },
+              "schema": {
+                "includePath": "datatypes/request/updateAccountDetailsrequestdataType.raml",
+                "type": "object",
+                "properties": {
+                  "accountName": {
+                    "minLength": 1,
+                    "maxLength": 20,
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "street": {
+                          "minLength": 1,
+                          "maxLength": 20,
+                          "type": "string"
+                        },
+                        "city": {
+                          "minLength": 1,
+                          "maxLength": 20,
+                          "type": "string"
+                        },
+                        "state": {
+                          "minLength": 1,
+                          "maxLength": 20,
+                          "type": "string"
+                        },
+                        "country": {
+                          "minLength": 1,
+                          "maxLength": 20,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "street",
+                        "city",
+                        "state",
+                        "country"
+                      ]
+                    }
+                  },
+                  "registeredPhone": {
+                    "type": "integer"
+                  },
+                  "accountBalance": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "accountName",
+                  "address",
+                  "registeredPhone",
+                  "accountBalance"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          }
+        ]
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "get Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "Message": "User account details has been deleted successfully"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "get Success Response",
+        "operationId": "deleteBankAccountDetailsByAccountNumber",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "accountNumber",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "minimum": 5,
+            "type": "number"
+          },
+          "description": "get Success Response"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {
+      "trait_error-scenarios_400": {
+        "description": "Bad Request-Parameter do not match the expected format/Payload Not as per Schema",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "example": {
+                "status": "error",
+                "statuscode": 400,
+                "statusdescription": "Bad Request",
+                "datetimestamp": "2020-05-14T14:22:01",
+                "details": "Error validating JSON. Error: - Missing required field \"XXXXXXXX\""
+              },
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_401": {
+        "description": "Unauthorised Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_404": {
+        "description": "Resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_405": {
+        "description": "Method Not Allowed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_406": {
+        "description": "Not acceptable -  - Server cannot produce a response matching the list of acceptable values",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_408": {
+        "description": "Request Timeout",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_415": {
+        "description": "Unsupported Media Type",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_503": {
+        "description": "Service Unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "trait_client-id-required_client_id": {
+        "name": "client_id",
+        "in": "header",
+        "required": true,
+        "description": "Unique identifier used to identify consumer application",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "trait_client-id-required_client_secret": {
+        "name": "client_secret",
+        "in": "header",
+        "required": true,
+        "description": "Client secret used for consumer application authorization",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "examples": {},
+    "requestBodies": {},
+    "headers": {},
+    "securitySchemes": {},
+    "links": {},
+    "callbacks": {}
+  }
+}

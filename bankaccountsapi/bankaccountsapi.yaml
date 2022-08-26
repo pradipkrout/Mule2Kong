@@ -1,0 +1,566 @@
+components:
+  callbacks: {}
+  examples: {}
+  headers: {}
+  links: {}
+  parameters:
+    trait_client-id-required_client_id:
+      description: Unique identifier used to identify consumer application
+      explode: false
+      in: header
+      name: client_id
+      required: true
+      schema:
+        type: string
+      style: simple
+    trait_client-id-required_client_secret:
+      description: Client secret used for consumer application authorization
+      explode: false
+      in: header
+      name: client_secret
+      required: true
+      schema:
+        type: string
+      style: simple
+  requestBodies: {}
+  responses:
+    trait_error-scenarios_400:
+      content:
+        application/json:
+          schema:
+            example:
+              datetimestamp: '2020-05-14T14:22:01'
+              details: 'Error validating JSON. Error: - Missing required field "XXXXXXXX"'
+              status: error
+              statuscode: 400
+              statusdescription: Bad Request
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Bad Request-Parameter do not match the expected format/Payload
+        Not as per Schema
+    trait_error-scenarios_401:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Unauthorised Request
+    trait_error-scenarios_404:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Resource not found
+    trait_error-scenarios_405:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Method Not Allowed
+    trait_error-scenarios_406:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Not acceptable -  - Server cannot produce a response matching the
+        list of acceptable values
+    trait_error-scenarios_408:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Request Timeout
+    trait_error-scenarios_415:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Unsupported Media Type
+    trait_error-scenarios_500:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Internal Server Error
+    trait_error-scenarios_503:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Service Unavailable
+  schemas: {}
+  securitySchemes: {}
+info:
+  description: To perform the CRUD operations for the accounts
+  title: BankingApi
+  version: v1
+openapi: 3.0.0
+paths:
+  /getAllUsersBankAccountDetails:
+    get:
+      description: get PriceFx Details
+      operationId: getAllUsersBankAccountDetails
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example:
+                - AccountBalance: 1000000
+                  AccountName: malli
+                  AccountNumber: 10021001687722
+                  Address:
+                  - city: Panaji
+                    country: IND
+                    postCode: 700075
+                    state: Goa
+                    street: County
+                  IfscCode: UTIB
+                  RegisteredPhone: 9010035373
+          description: get Success Response
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+    post:
+      description: get PriceFx Details
+      operationId: postAllUsersBankAccountDetails
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      requestBody:
+        content:
+          application/json:
+            example:
+            - accountBalance: 1000000
+              accountName: malli
+              accountNumber: 10021001687722
+              address:
+              - city: Panaji
+                country: IND
+                postCode: 700075
+                state: Goa
+                street: County
+              ifscCode: UTIB0001634
+              registeredPhone: 9010035373
+            schema:
+              items:
+                properties:
+                  accountBalance:
+                    type: integer
+                  accountName:
+                    maxLength: 20
+                    minLength: 1
+                    type: string
+                  accountNumber:
+                    type: integer
+                  address:
+                    items:
+                      properties:
+                        city:
+                          maxLength: 20
+                          minLength: 1
+                          type: string
+                        country:
+                          maxLength: 20
+                          minLength: 1
+                          type: string
+                        state:
+                          maxLength: 20
+                          minLength: 1
+                          type: string
+                        street:
+                          maxLength: 20
+                          minLength: 1
+                          type: string
+                      required:
+                      - city
+                      - country
+                      - state
+                      - street
+                      type: object
+                    type: array
+                  ifscCode:
+                    type: string
+                  registeredPhone:
+                    type: integer
+                required:
+                - accountBalance
+                - accountName
+                - accountNumber
+                - address
+                - ifscCode
+                - registeredPhone
+                type: object
+              type: array
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                example:
+                  Message: your account has been created successfully
+          description: get Success Response
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+  /getAllUsersBankAccountDetails/{accountNumber}:
+    delete:
+      description: get Success Response
+      operationId: deleteBankAccountDetailsByAccountNumber
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example:
+                  Message: User account details has been deleted successfully
+          description: get Success Response
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+    get:
+      description: get Success Response
+      operationId: getBankAccountDetailsByAccountNumber
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example:
+                  AccountBalance: 1000000
+                  AccountName: malli
+                  AccountNumber: 10021001687722
+                  Address:
+                  - city: Panaji
+                    country: IND
+                    postCode: 700075
+                    state: Goa
+                    street: County
+                  IfscCode: UTIB
+                  RegisteredPhone: 9010035373
+          description: get Success Response
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+    parameters:
+    - description: get Success Response
+      explode: false
+      in: path
+      name: accountNumber
+      required: true
+      schema:
+        minimum: 5
+        type: number
+      style: simple
+    put:
+      description: get Success Response
+      operationId: updateBankAccountDetailsByAccountNumber
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      requestBody:
+        content:
+          application/json:
+            example:
+              accountBalance: 1000000
+              accountName: malli
+              address:
+              - city: Panaji
+                country: IND
+                postCode: 700075
+                state: Goa
+                street: County
+              ifscCode: UTIB0001634
+              registeredPhone: 9010035373
+            schema:
+              properties:
+                accountBalance:
+                  type: integer
+                accountName:
+                  maxLength: 20
+                  minLength: 1
+                  type: string
+                address:
+                  items:
+                    properties:
+                      city:
+                        maxLength: 20
+                        minLength: 1
+                        type: string
+                      country:
+                        maxLength: 20
+                        minLength: 1
+                        type: string
+                      state:
+                        maxLength: 20
+                        minLength: 1
+                        type: string
+                      street:
+                        maxLength: 20
+                        minLength: 1
+                        type: string
+                    required:
+                    - city
+                    - country
+                    - state
+                    - street
+                    type: object
+                  type: array
+                registeredPhone:
+                  type: integer
+              required:
+              - accountBalance
+              - accountName
+              - address
+              - registeredPhone
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example:
+                  Message: Dear User your details has been updated successfully
+          description: get Success Response
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+servers:
+- url: /
