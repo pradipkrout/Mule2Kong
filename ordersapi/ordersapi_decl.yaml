@@ -1,0 +1,67 @@
+_format_version: "1.1"
+services:
+  - name: OrdersApi
+    protocol: http
+    host: localhost
+    port: 80
+    path: /
+    plugins: []
+    routes:
+      - tags:
+          - OAS3_import
+          - OAS3file_ordersapi.yaml
+        name: OrdersApi-getOrders
+        methods:
+          - GET
+        paths:
+          - /orders$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_ordersapi.yaml
+        name: OrdersApi-postOrdersById
+        methods:
+          - POST
+        paths:
+          - /orders$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_ordersapi.yaml
+        name: OrdersApi-updateOrdersById
+        methods:
+          - PUT
+        paths:
+          - /orders$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_ordersapi.yaml
+        name: OrdersApi-deleteOrdersById
+        methods:
+          - DELETE
+        paths:
+          - /orders/(?<orderId>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_ordersapi.yaml
+        name: OrdersApi-getPriceFxDetails
+        methods:
+          - GET
+        paths:
+          - /pricefxDetails$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_ordersapi.yaml
+        name: OrdersApi-postPriceFxDetails
+        methods:
+          - POST
+        paths:
+          - /pricefxDetails$
+        strip_path: false
+    tags:
+      - OAS3_import
+      - OAS3file_ordersapi.yaml
+
