@@ -1,0 +1,953 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "OrdersApi",
+    "version": "v1",
+    "description": "To perform the CRUD operations for the orders"
+  },
+  "servers": [],
+  "paths": {
+    "/pricefxDetails": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "get PriceFx Details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "SiteUseIDs": [
+                        "1111111111",
+                        "2222222222",
+                        "3333333333"
+                      ],
+                      "ItemNumber": "1000000001",
+                      "UTC_EffectiveDate": "01/01/2018",
+                      "UTC_EndDate": "2/1/2018",
+                      "Price": 10.99,
+                      "Price_UOM": "EA",
+                      "Currency": "USD",
+                      "Setup": 99.99
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "get PriceFx Details",
+        "operationId": "getPriceFxDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          },
+          {
+            "name": "oprflag",
+            "in": "query",
+            "required": true,
+            "description": "processed or emailed",
+            "schema": {
+              "enum": [
+                "processed",
+                "emailed"
+              ],
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "post Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "Success",
+                    "statuscode": 200,
+                    "eventid": "873ebd2f-9e91-4824-945c-7072282052b4",
+                    "statusdescription": "inserted/updated",
+                    "datetimestamp": "2020-05-14T14:22:00",
+                    "details": "Event successfully processed"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "Post PriceFx Details",
+        "operationId": "postPriceFxDetails",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": [
+                {
+                  "SiteUseIDs": [
+                    "1111111111",
+                    "2222222222",
+                    "3333333333"
+                  ],
+                  "ItemNumber": "1000000001",
+                  "UTC_EffectiveDate": "01/01/2018",
+                  "UTC_EndDate": "2/1/2018",
+                  "Price": 10,
+                  "Price_UOM": "EA",
+                  "Currency": "USD",
+                  "Setup": 99
+                }
+              ],
+              "schema": {
+                "includePath": "schemas/post-pricefx-dataType.raml",
+                "type": "array",
+                "items": {
+                  "includePath": "schemas/post-pricefx-dataType.raml",
+                  "type": "object",
+                  "properties": {
+                    "SiteUseIDs": {
+                      "type": "array"
+                    },
+                    "ItemNumber": {
+                      "type": "string"
+                    },
+                    "UTC_EffectiveDate": {
+                      "type": "string"
+                    },
+                    "UTC_EndDate": {
+                      "type": "string"
+                    },
+                    "Price": {
+                      "type": "integer"
+                    },
+                    "Price_UOM": {
+                      "type": "string"
+                    },
+                    "Currency": {
+                      "type": "string"
+                    },
+                    "Setup": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "SiteUseIDs",
+                    "ItemNumber",
+                    "UTC_EffectiveDate",
+                    "UTC_EndDate",
+                    "Price",
+                    "Price_UOM",
+                    "Currency",
+                    "Setup"
+                  ]
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          },
+          {
+            "name": "operation",
+            "in": "query",
+            "required": true,
+            "description": "operation",
+            "schema": {
+              "maxLength": 9,
+              "enum": [
+                "processed",
+                "emailed",
+                "insert"
+              ],
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/orders": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "post Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": [
+                    {
+                      "customerNumber": 363,
+                      "comments": null,
+                      "orderNumber": 10100,
+                      "shippedDate": "2003-01-10T00:00:00",
+                      "orderDate": "2003-01-06T00:00:00",
+                      "requiredDate": "2003-01-13T00:00:00",
+                      "status": "Shipped"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "To retrieve the order details",
+        "operationId": "getOrders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          }
+        ]
+      },
+      "post": {
+        "responses": {
+          "201": {
+            "description": "post Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "Success",
+                    "statuscode": 200,
+                    "eventid": "873ebd2f-9e91-4824-945c-7072282052b4",
+                    "statusdescription": "inserted/updated",
+                    "datetimestamp": "2020-05-14T14:22:00",
+                    "details": "Event successfully processed"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "To insert/update the message into the orders table",
+        "operationId": "postOrdersById",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "productLine": "Motorcycles",
+                "productScale": "1:10",
+                "productCode": "S10_1678",
+                "productVendor": "Min Lin Diecast",
+                "productDescription": "This replica features working kickstand, front suspension, gear-shift lever, footbrake lever, drive chain, wheels and steering. All parts are particularly delicate due to their precise scale and require special care and attention.",
+                "buyPrice": 48,
+                "quantityInStock": 7933,
+                "MSRP": 95,
+                "productName": "1969 Harley Davidson Ultimate Chopper"
+              },
+              "schema": {
+                "includePath": "schemas/post-orders-dataType.raml",
+                "type": "object",
+                "properties": {
+                  "productLine": {
+                    "type": "string"
+                  },
+                  "productScale": {
+                    "type": "string"
+                  },
+                  "productCode": {
+                    "type": "string"
+                  },
+                  "productVendor": {
+                    "type": "string"
+                  },
+                  "productDescription": {
+                    "type": "string"
+                  },
+                  "buyPrice": {
+                    "type": "integer"
+                  },
+                  "quantityInStock": {
+                    "type": "integer"
+                  },
+                  "MSRP": {
+                    "type": "integer"
+                  },
+                  "productName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "productLine",
+                  "productScale",
+                  "productCode",
+                  "productVendor",
+                  "productDescription",
+                  "buyPrice",
+                  "quantityInStock",
+                  "MSRP",
+                  "productName"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          }
+        ]
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "description": "post Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "status": "Success",
+                    "statuscode": 200,
+                    "eventid": "873ebd2f-9e91-4824-945c-7072282052b4",
+                    "statusdescription": "inserted/updated",
+                    "datetimestamp": "2020-05-14T14:22:00",
+                    "details": "Event successfully processed"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "To insert/update the message into the orders table",
+        "operationId": "updateOrdersById",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "productLine": "Motorcycles",
+                "productScale": "1:10",
+                "productCode": "S10_1678",
+                "productVendor": "Min Lin Diecast",
+                "productDescription": "This replica features working kickstand, front suspension, gear-shift lever, footbrake lever, drive chain, wheels and steering. All parts are particularly delicate due to their precise scale and require special care and attention.",
+                "buyPrice": 48,
+                "quantityInStock": 7933,
+                "MSRP": 95,
+                "productName": "1969 Harley Davidson Ultimate Chopper"
+              },
+              "schema": {
+                "includePath": "schemas/post-orders-dataType.raml",
+                "type": "object",
+                "properties": {
+                  "productLine": {
+                    "type": "string"
+                  },
+                  "productScale": {
+                    "type": "string"
+                  },
+                  "productCode": {
+                    "type": "string"
+                  },
+                  "productVendor": {
+                    "type": "string"
+                  },
+                  "productDescription": {
+                    "type": "string"
+                  },
+                  "buyPrice": {
+                    "type": "integer"
+                  },
+                  "quantityInStock": {
+                    "type": "integer"
+                  },
+                  "MSRP": {
+                    "type": "integer"
+                  },
+                  "productName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "productLine",
+                  "productScale",
+                  "productCode",
+                  "productVendor",
+                  "productDescription",
+                  "buyPrice",
+                  "quantityInStock",
+                  "MSRP",
+                  "productName"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          }
+        ]
+      }
+    },
+    "/orders/{orderId}": {
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "post Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "message": "Order has been deleted successfully with orderId: 1234"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/trait_error-scenarios_400"
+          },
+          "401": {
+            "$ref": "#/components/responses/trait_error-scenarios_401"
+          },
+          "404": {
+            "$ref": "#/components/responses/trait_error-scenarios_404"
+          },
+          "405": {
+            "$ref": "#/components/responses/trait_error-scenarios_405"
+          },
+          "406": {
+            "$ref": "#/components/responses/trait_error-scenarios_406"
+          },
+          "408": {
+            "$ref": "#/components/responses/trait_error-scenarios_408"
+          },
+          "415": {
+            "$ref": "#/components/responses/trait_error-scenarios_415"
+          },
+          "500": {
+            "$ref": "#/components/responses/trait_error-scenarios_500"
+          },
+          "503": {
+            "$ref": "#/components/responses/trait_error-scenarios_503"
+          }
+        },
+        "description": "To retrieve the order details using orderId",
+        "operationId": "deleteOrdersById",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_id"
+          },
+          {
+            "$ref": "#/components/parameters/trait_client-id-required_client_secret"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {
+      "trait_error-scenarios_400": {
+        "description": "Bad Request-Parameter do not match the expected format/Payload Not as per Schema",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "example": {
+                "status": "error",
+                "statuscode": 400,
+                "statusdescription": "Bad Request",
+                "datetimestamp": "2020-05-14T14:22:01",
+                "details": "Error validating JSON. Error: - Missing required field \"XXXXXXXX\""
+              },
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_401": {
+        "description": "Unauthorised Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_404": {
+        "description": "Resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_405": {
+        "description": "Method Not Allowed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_406": {
+        "description": "Not acceptable -  - Server cannot produce a response matching the list of acceptable values",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_408": {
+        "description": "Request Timeout",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_415": {
+        "description": "Unsupported Media Type",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "trait_error-scenarios_503": {
+        "description": "Service Unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": [
+                "status",
+                "statuscode",
+                "statusdescription",
+                "datetimestamp",
+                "details"
+              ],
+              "includePath": "schemas/error-schema.json",
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "statuscode": {
+                  "type": "integer"
+                },
+                "statusdescription": {
+                  "type": "string"
+                },
+                "datetimestamp": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "trait_client-id-required_client_id": {
+        "name": "client_id",
+        "in": "header",
+        "required": true,
+        "description": "Unique identifier used to identify consumer application",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "trait_client-id-required_client_secret": {
+        "name": "client_secret",
+        "in": "header",
+        "required": true,
+        "description": "Client secret used for consumer application authorization",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "examples": {},
+    "requestBodies": {},
+    "headers": {},
+    "securitySchemes": {},
+    "links": {},
+    "callbacks": {}
+  }
+}

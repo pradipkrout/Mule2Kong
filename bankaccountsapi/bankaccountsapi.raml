@@ -1,0 +1,81 @@
+#%RAML 1.0
+title: BankingApi
+description: To perform the CRUD operations for the accounts
+version: v1
+protocols: [HTTPS]
+mediaType: application/json
+
+traits:
+  client-id-required: !include traits/ClientIdSecretEnforcement.raml
+  error-scenarios: !include traits/errorable.raml
+
+/getAllUsersBankAccountDetails:
+  is: [client-id-required,error-scenarios]
+  get:
+    displayName: getAllUsersBankAccountDetails
+    description: get PriceFx Details
+    responses:
+      200:
+        displayName: success
+        description: get Success Response 
+        body:
+            example: !include examples/response/getUsersBankAccountDetailsResponse.json
+  post:
+    displayName: postAllUsersBankAccountDetails
+    description: get PriceFx Details
+    body:
+      application/json:
+        displayName: success
+        description: get Success Response 
+        example: !include examples/request/addNewAccountNumbersrequest.json
+        type: !include datatypes/request/addAccountNumberrequestdataType.raml
+    responses:
+      201:
+        displayName: success
+        description: get Success Response 
+        body:
+            example: !include examples/response/addNewUsersAccountNumbers.json
+         
+  /{accountNumber} :
+    uriParameters:
+      accountNumber:
+        displayName: success
+        description: get Success Response 
+        type: number
+        minimum: 5
+    is: [client-id-required,error-scenarios]
+    get:
+      displayName: getBankAccountDetailsByAccountNumber
+      description: get Success Response
+      responses:
+        200:
+          displayName: success
+          description: get Success Response 
+          body:
+              example: !include examples/response/getUserByAccountNumberResponse.json               
+    put:
+      displayName: updateBankAccountDetailsByAccountNumber
+      description: get Success Response
+      body:
+        application/json:
+          displayName: success
+          description: get Success Response 
+          type: !include datatypes/request/updateAccountDetailsrequestdataType.raml
+          example: !include examples/request/updateUserAccountDetailsrequest.json
+      responses:
+        200:
+          displayName: success
+          description: get Success Response 
+          body:
+              example: !include examples/response/updateUserAccountDetailsresponse.json                        
+    delete:
+      displayName: deleteBankAccountDetailsByAccountNumber
+      description: get Success Response
+      responses:
+        200:
+          displayName: success
+          description: get Success Response 
+          body:
+              example : !include examples/response/deleteUserAccountDetailsresponse.json
+              
+      

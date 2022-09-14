@@ -1,0 +1,122 @@
+#%RAML 1.0
+title: OrdersApi
+description: To perform the CRUD operations for the orders
+version: v1
+protocols: [HTTPS]
+mediaType: application/json
+
+traits:
+  client-id-required: !include traits/ClientIdSecretEnforcement.raml
+  error-scenarios: !include traits/errorable.raml
+
+
+
+/pricefxDetails: 
+  get:
+    is: [client-id-required,error-scenarios]
+    displayName: getPriceFxDetails
+    description: get PriceFx Details
+    queryParameters:
+      oprflag:
+        displayName: oprflag
+        description: processed or emailed
+        type: string
+        enum: ['processed','emailed']   
+        required: true 
+     
+    responses:
+      200:
+        displayName: getPriceFxDetails
+        description: get PriceFx Details
+        body:
+          application/json:
+            example: !include examples/get-pricefx-details-response.json
+
+  post:
+   is:  [client-id-required,error-scenarios]  
+   displayName: postPriceFxDetails
+   description: Post PriceFx Details
+   queryParameters:
+      operation:
+        displayName: operation
+        description: operation
+        type: string
+        enum: [processed, emailed, insert]
+        maxLength: 9
+        required: true
+   body:
+    application/json:
+       displayName: post success
+       description: post Success Response
+       type: !include schemas/post-pricefx-dataType.raml
+       example: !include examples/post-pricefx-details-request.json
+   responses:
+    200:
+      displayName: post success
+      description: post Success Response
+      body:
+        application/json:
+          example: !include examples/success-response-example.json
+/orders:
+  get:
+    is: [client-id-required,error-scenarios]
+    displayName: getOrders
+    description: To retrieve the order details 
+    responses:
+      200:
+        displayName: post success
+        description: post Success Response
+        body:
+          application/json:
+            example: !include examples/get-orders-response.json
+  /{orderId}:
+    delete:
+      is: [client-id-required,error-scenarios]
+      displayName: deleteOrdersById
+      description: To retrieve the order details using orderId
+      responses:
+        200:
+          displayName: post success
+          description: post Success Response
+          body:
+            application/json:
+              example: !include examples/delete-orders-example.json
+  post:
+    is:  [client-id-required,error-scenarios]  
+    displayName: postOrdersById
+    description: To insert/update the message into the orders table
+    body:
+      application/json:
+        displayName: post success
+        description: post Success Response
+        type: !include schemas/post-orders-dataType.raml
+        example: !include examples/post-orders-request.json
+    responses:
+      201:
+        displayName: post success
+        description: post Success Response
+        body:
+          application/json:
+            example: !include examples/success-response-example.json
+              
+  put:
+    is:  [client-id-required,error-scenarios] 
+    displayName: updateOrdersById 
+    description: To insert/update the message into the orders table
+    body:
+      application/json:
+        displayName: post success
+        description: post Success Response
+        type: !include schemas/post-orders-dataType.raml
+        example: !include examples/post-orders-request.json
+    responses:
+      201:
+        displayName: post success
+        description: post Success Response
+        body:
+          application/json:
+            example: !include examples/success-response-example.json
+
+
+
+       

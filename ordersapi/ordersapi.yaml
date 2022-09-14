@@ -1,0 +1,651 @@
+components:
+  callbacks: {}
+  examples: {}
+  headers: {}
+  links: {}
+  parameters:
+    trait_client-id-required_client_id:
+      description: Unique identifier used to identify consumer application
+      explode: false
+      in: header
+      name: client_id
+      required: true
+      schema:
+        type: string
+      style: simple
+    trait_client-id-required_client_secret:
+      description: Client secret used for consumer application authorization
+      explode: false
+      in: header
+      name: client_secret
+      required: true
+      schema:
+        type: string
+      style: simple
+  requestBodies: {}
+  responses:
+    trait_error-scenarios_400:
+      content:
+        application/json:
+          schema:
+            example:
+              datetimestamp: '2020-05-14T14:22:01'
+              details: 'Error validating JSON. Error: - Missing required field "XXXXXXXX"'
+              status: error
+              statuscode: 400
+              statusdescription: Bad Request
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Bad Request-Parameter do not match the expected format/Payload
+        Not as per Schema
+    trait_error-scenarios_401:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Unauthorised Request
+    trait_error-scenarios_404:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Resource not found
+    trait_error-scenarios_405:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Method Not Allowed
+    trait_error-scenarios_406:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Not acceptable -  - Server cannot produce a response matching the
+        list of acceptable values
+    trait_error-scenarios_408:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Request Timeout
+    trait_error-scenarios_415:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Unsupported Media Type
+    trait_error-scenarios_500:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Internal Server Error
+    trait_error-scenarios_503:
+      content:
+        application/json:
+          schema:
+            properties:
+              datetimestamp:
+                type: string
+              details:
+                type: string
+              status:
+                type: string
+              statuscode:
+                type: integer
+              statusdescription:
+                type: string
+            required:
+            - datetimestamp
+            - details
+            - status
+            - statuscode
+            - statusdescription
+            type: object
+      description: Service Unavailable
+  schemas: {}
+  securitySchemes: {}
+info:
+  description: To perform the CRUD operations for the orders
+  title: OrdersApi
+  version: v1
+openapi: 3.0.0
+paths:
+  /orders:
+    get:
+      description: To retrieve the order details
+      operationId: getOrders
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example:
+                - comments: null
+                  customerNumber: 363
+                  orderDate: '2003-01-06T00:00:00'
+                  orderNumber: 10100
+                  requiredDate: '2003-01-13T00:00:00'
+                  shippedDate: '2003-01-10T00:00:00'
+                  status: Shipped
+          description: post Success Response
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+    post:
+      description: To insert/update the message into the orders table
+      operationId: postOrdersById
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      requestBody:
+        content:
+          application/json:
+            example:
+              MSRP: 95
+              buyPrice: 48
+              productCode: S10_1678
+              productDescription: This replica features working kickstand, front suspension,
+                gear-shift lever, footbrake lever, drive chain, wheels and steering.
+                All parts are particularly delicate due to their precise scale and
+                require special care and attention.
+              productLine: Motorcycles
+              productName: 1969 Harley Davidson Ultimate Chopper
+              productScale: '1:10'
+              productVendor: Min Lin Diecast
+              quantityInStock: 7933
+            schema:
+              properties:
+                MSRP:
+                  type: integer
+                buyPrice:
+                  type: integer
+                productCode:
+                  type: string
+                productDescription:
+                  type: string
+                productLine:
+                  type: string
+                productName:
+                  type: string
+                productScale:
+                  type: string
+                productVendor:
+                  type: string
+                quantityInStock:
+                  type: integer
+              required:
+              - MSRP
+              - buyPrice
+              - productCode
+              - productDescription
+              - productLine
+              - productName
+              - productScale
+              - productVendor
+              - quantityInStock
+              type: object
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                example:
+                  datetimestamp: '2020-05-14T14:22:00'
+                  details: Event successfully processed
+                  eventid: 873ebd2f-9e91-4824-945c-7072282052b4
+                  status: Success
+                  statuscode: 200
+                  statusdescription: inserted/updated
+          description: post Success Response
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+    put:
+      description: To insert/update the message into the orders table
+      operationId: updateOrdersById
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      requestBody:
+        content:
+          application/json:
+            example:
+              MSRP: 95
+              buyPrice: 48
+              productCode: S10_1678
+              productDescription: This replica features working kickstand, front suspension,
+                gear-shift lever, footbrake lever, drive chain, wheels and steering.
+                All parts are particularly delicate due to their precise scale and
+                require special care and attention.
+              productLine: Motorcycles
+              productName: 1969 Harley Davidson Ultimate Chopper
+              productScale: '1:10'
+              productVendor: Min Lin Diecast
+              quantityInStock: 7933
+            schema:
+              properties:
+                MSRP:
+                  type: integer
+                buyPrice:
+                  type: integer
+                productCode:
+                  type: string
+                productDescription:
+                  type: string
+                productLine:
+                  type: string
+                productName:
+                  type: string
+                productScale:
+                  type: string
+                productVendor:
+                  type: string
+                quantityInStock:
+                  type: integer
+              required:
+              - MSRP
+              - buyPrice
+              - productCode
+              - productDescription
+              - productLine
+              - productName
+              - productScale
+              - productVendor
+              - quantityInStock
+              type: object
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                example:
+                  datetimestamp: '2020-05-14T14:22:00'
+                  details: Event successfully processed
+                  eventid: 873ebd2f-9e91-4824-945c-7072282052b4
+                  status: Success
+                  statuscode: 200
+                  statusdescription: inserted/updated
+          description: post Success Response
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+  /orders/{orderId}:
+    delete:
+      description: To retrieve the order details using orderId
+      operationId: deleteOrdersById
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example:
+                  message: 'Order has been deleted successfully with orderId: 1234'
+          description: post Success Response
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+    parameters:
+    - explode: false
+      in: path
+      name: orderId
+      required: true
+      schema:
+        type: string
+      style: simple
+  /pricefxDetails:
+    get:
+      description: get PriceFx Details
+      operationId: getPriceFxDetails
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      - description: processed or emailed
+        explode: true
+        in: query
+        name: oprflag
+        required: true
+        schema:
+          enum:
+          - processed
+          - emailed
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example:
+                - Currency: USD
+                  ItemNumber: '1000000001'
+                  Price: 10.99
+                  Price_UOM: EA
+                  Setup: 99.99
+                  SiteUseIDs:
+                  - '1111111111'
+                  - '2222222222'
+                  - '3333333333'
+                  UTC_EffectiveDate: 01/01/2018
+                  UTC_EndDate: 2/1/2018
+          description: get PriceFx Details
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+    post:
+      description: Post PriceFx Details
+      operationId: postPriceFxDetails
+      parameters:
+      - $ref: '#/components/parameters/trait_client-id-required_client_id'
+      - $ref: '#/components/parameters/trait_client-id-required_client_secret'
+      - description: operation
+        explode: true
+        in: query
+        name: operation
+        required: true
+        schema:
+          enum:
+          - processed
+          - emailed
+          - insert
+          maxLength: 9
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            example:
+            - Currency: USD
+              ItemNumber: '1000000001'
+              Price: 10
+              Price_UOM: EA
+              Setup: 99
+              SiteUseIDs:
+              - '1111111111'
+              - '2222222222'
+              - '3333333333'
+              UTC_EffectiveDate: 01/01/2018
+              UTC_EndDate: 2/1/2018
+            schema:
+              items:
+                properties:
+                  Currency:
+                    type: string
+                  ItemNumber:
+                    type: string
+                  Price:
+                    type: integer
+                  Price_UOM:
+                    type: string
+                  Setup:
+                    type: integer
+                  SiteUseIDs:
+                    type: array
+                  UTC_EffectiveDate:
+                    type: string
+                  UTC_EndDate:
+                    type: string
+                required:
+                - Currency
+                - ItemNumber
+                - Price
+                - Price_UOM
+                - Setup
+                - SiteUseIDs
+                - UTC_EffectiveDate
+                - UTC_EndDate
+                type: object
+              type: array
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                example:
+                  datetimestamp: '2020-05-14T14:22:00'
+                  details: Event successfully processed
+                  eventid: 873ebd2f-9e91-4824-945c-7072282052b4
+                  status: Success
+                  statuscode: 200
+                  statusdescription: inserted/updated
+          description: post Success Response
+        '400':
+          $ref: '#/components/responses/trait_error-scenarios_400'
+        '401':
+          $ref: '#/components/responses/trait_error-scenarios_401'
+        '404':
+          $ref: '#/components/responses/trait_error-scenarios_404'
+        '405':
+          $ref: '#/components/responses/trait_error-scenarios_405'
+        '406':
+          $ref: '#/components/responses/trait_error-scenarios_406'
+        '408':
+          $ref: '#/components/responses/trait_error-scenarios_408'
+        '415':
+          $ref: '#/components/responses/trait_error-scenarios_415'
+        '500':
+          $ref: '#/components/responses/trait_error-scenarios_500'
+        '503':
+          $ref: '#/components/responses/trait_error-scenarios_503'
+servers:
+- url: /
