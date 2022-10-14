@@ -1,662 +1,223 @@
-apiVersion: configuration.konghq.com/v1
-kind: KongIngress
-metadata:
-  name: delete-method
-route:
-  methods:
-    - delete
----
-apiVersion: configuration.konghq.com/v1
-kind: KongIngress
-metadata:
-  name: get-method
-route:
-  methods:
-    - get
----
-apiVersion: configuration.konghq.com/v1
-kind: KongIngress
-metadata:
-  name: post-method
-route:
-  methods:
-    - post
----
-apiVersion: configuration.konghq.com/v1
-kind: KongPlugin
-metadata:
-  name: add-key-auth-m0
-plugin: key-auth
-config:
-  key_names:
-    - api_key
----
-apiVersion: configuration.konghq.com/v1
-kind: KongPlugin
-metadata:
-  name: add-key-auth-m1
-plugin: key-auth
-config:
-  key_names:
-    - api_key
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-0
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+_format_version: "1.1"
+services:
+  - name: Petstore
+    protocol: http
+    host: Petstore.upstream
+    port: 80
+    path: /
+    plugins: []
+    routes:
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-addPet
+        methods:
+          - POST
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /pet
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-1
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /pet$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-updatePet
+        methods:
+          - PUT
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /pet/findByStatus
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-2
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /pet$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-findPetsByStatus
+        methods:
+          - GET
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /pet/findByTags
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-3
-  annotations:
-    kubernetes.io/ingress.class: kong
-    konghq.com/override: delete-method
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /pet/findByStatus$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-findPetsByTags
+        methods:
+          - GET
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /pet/.*
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-4
-  annotations:
-    kubernetes.io/ingress.class: kong
-    konghq.com/plugins: add-key-auth-m0
-    konghq.com/override: get-method
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /pet/findByTags$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-deletePet
+        methods:
+          - DELETE
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /pet/.*
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-5
-  annotations:
-    kubernetes.io/ingress.class: kong
-    konghq.com/override: post-method
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /pet/(?<petId>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-getPetById
+        methods:
+          - GET
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /pet/.*
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-6
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /pet/(?<petId>[^\/]+)$
+        strip_path: false
+        plugins:
+          - name: key-auth
+            config:
+              key_names:
+                - api_key
+            tags:
+              - OAS3_import
+              - OAS3file_petstore.yaml
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-updatePetWithForm
+        methods:
+          - POST
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /pet/.*/uploadImage
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-7
-  annotations:
-    kubernetes.io/ingress.class: kong
-    konghq.com/plugins: add-key-auth-m1
-    konghq.com/override: get-method
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /pet/(?<petId>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-uploadFile
+        methods:
+          - POST
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /store/inventory
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-8
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /pet/(?<petId>[^\/]+)/uploadImage$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-getInventory
+        methods:
+          - GET
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /store/order
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-9
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /store/inventory$
+        strip_path: false
+        plugins:
+          - name: key-auth
+            config:
+              key_names:
+                - api_key
+            tags:
+              - OAS3_import
+              - OAS3file_petstore.yaml
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-placeOrder
+        methods:
+          - POST
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /store/order/.*
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-10
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /store/order$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-deleteOrder
+        methods:
+          - DELETE
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /user
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-11
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /store/order/(?<orderId>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-getOrderById
+        methods:
+          - GET
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /user/createWithArray
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-12
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /store/order/(?<orderId>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-createUser
+        methods:
+          - POST
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /user/createWithList
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-13
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /user$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-createUsersWithArrayInput
+        methods:
+          - POST
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /user/login
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-14
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /user/createWithArray$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-createUsersWithListInput
+        methods:
+          - POST
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /user/logout
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-15
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /user/createWithList$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-loginUser
+        methods:
+          - GET
         paths:
-          - backend:
-              service:
-                name: petstore-service-0
-                port:
-                  number: 80
-            path: /user/.*
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-16
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /user/login$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-logoutUser
+        methods:
+          - GET
         paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /pet
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-17
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /user/logout$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-deleteUser
+        methods:
+          - DELETE
         paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /pet/findByStatus
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-18
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /user/(?<username>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-getUserByName
+        methods:
+          - GET
         paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /pet/findByTags
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-19
-  annotations:
-    kubernetes.io/ingress.class: kong
-    konghq.com/override: delete-method
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
+          - /user/(?<username>[^\/]+)$
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+        name: Petstore-updateUser
+        methods:
+          - PUT
         paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /pet/.*
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-20
-  annotations:
-    kubernetes.io/ingress.class: kong
-    konghq.com/plugins: add-key-auth-m0
-    konghq.com/override: get-method
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /pet/.*
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-21
-  annotations:
-    kubernetes.io/ingress.class: kong
-    konghq.com/override: post-method
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /pet/.*
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-22
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /pet/.*/uploadImage
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-23
-  annotations:
-    kubernetes.io/ingress.class: kong
-    konghq.com/plugins: add-key-auth-m1
-    konghq.com/override: get-method
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /store/inventory
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-24
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /store/order
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-25
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /store/order/.*
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-26
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /user
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-27
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /user/createWithArray
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-28
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /user/createWithList
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-29
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /user/login
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-30
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /user/logout
-            pathType: ImplementationSpecific
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: petstore-31
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: petstore.swagger.io
-      http:
-        paths:
-          - backend:
-              service:
-                name: petstore-service-1
-                port:
-                  number: 80
-            path: /user/.*
-            pathType: ImplementationSpecific
+          - /user/(?<username>[^\/]+)$
+        strip_path: false
+    tags:
+      - OAS3_import
+      - OAS3file_petstore.yaml
+upstreams:
+  - name: Petstore.upstream
+    targets:
+      - target: petstore.swagger.io:80
+        tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+      - target: petstore.swagger.io:443
+        tags:
+          - OAS3_import
+          - OAS3file_petstore.yaml
+    tags:
+      - OAS3_import
+      - OAS3file_petstore.yaml
 
