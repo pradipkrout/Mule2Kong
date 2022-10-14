@@ -664,5 +664,5 @@ paths:
         '404':
           description: User not found
 servers:
-- url: http://petstore.swagger.io/v2
-- url: https://petstore.swagger.io/v2
+- url: http://petstore.swagger.io/
+- url: https://petstore.swagger.io/
