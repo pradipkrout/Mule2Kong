@@ -1,58 +1,18 @@
-_format_version: "1.1"
-services:
-  - name: BankingApi
-    protocol: http
-    host: localhost
-    port: 80
-    path: /
-    plugins: []
-    routes:
-      - tags:
-          - OAS3_import
-          - OAS3file_bankaccountsapi.yaml
-        name: BankingApi-getAllUsersBankAccountDetails
-        methods:
-          - GET
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bankingapi-0
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+    - host: localhost
+      http:
         paths:
-          - /getAllUsersBankAccountDetails$
-        strip_path: false
-      - tags:
-          - OAS3_import
-          - OAS3file_bankaccountsapi.yaml
-        name: BankingApi-postAllUsersBankAccountDetails
-        methods:
-          - POST
-        paths:
-          - /getAllUsersBankAccountDetails$
-        strip_path: false
-      - tags:
-          - OAS3_import
-          - OAS3file_bankaccountsapi.yaml
-        name: BankingApi-deleteBankAccountDetailsByAccountNumber
-        methods:
-          - DELETE
-        paths:
-          - /getAllUsersBankAccountDetails/(?<accountNumber>[^\/]+)$
-        strip_path: false
-      - tags:
-          - OAS3_import
-          - OAS3file_bankaccountsapi.yaml
-        name: BankingApi-getBankAccountDetailsByAccountNumber
-        methods:
-          - GET
-        paths:
-          - /getAllUsersBankAccountDetails/(?<accountNumber>[^\/]+)$
-        strip_path: false
-      - tags:
-          - OAS3_import
-          - OAS3file_bankaccountsapi.yaml
-        name: BankingApi-updateBankAccountDetailsByAccountNumber
-        methods:
-          - PUT
-        paths:
-          - /getAllUsersBankAccountDetails/(?<accountNumber>[^\/]+)$
-        strip_path: false
-    tags:
-      - OAS3_import
-      - OAS3file_bankaccountsapi.yaml
+          - backend:
+              service:
+                name: bankingapi-service-0
+                port:
+                  number: 80
+            pathType: ImplementationSpecific
 
