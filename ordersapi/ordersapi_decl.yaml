@@ -1,18 +1,56 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ordersapi-0
-  annotations:
-    kubernetes.io/ingress.class: kong
-spec:
-  rules:
-    - host: localhost
-      http:
+_format_version: "1.1"
+services:
+  - name: OrdersApi
+    protocol: http
+    host: localhost
+    port: 80
+    path: /
+    plugins: []
+    routes:
+      - tags:
+          &a1
+          - OAS3_import
+          - OAS3file_ordersapi.yaml
+        name: OrdersApi-getOrders
+        methods:
+          - GET
         paths:
-          - backend:
-              service:
-                name: ordersapi-service-0
-                port:
-                  number: 80
-            pathType: ImplementationSpecific
+          - /orders$
+        strip_path: false
+      - tags: *a1
+        name: OrdersApi-postOrdersById
+        methods:
+          - POST
+        paths:
+          - /orders$
+        strip_path: false
+      - tags: *a1
+        name: OrdersApi-updateOrdersById
+        methods:
+          - PUT
+        paths:
+          - /orders$
+        strip_path: false
+      - tags: *a1
+        name: OrdersApi-deleteOrdersById
+        methods:
+          - DELETE
+        paths:
+          - /orders/(?<orderId>[^\/]+)$
+        strip_path: false
+      - tags: *a1
+        name: OrdersApi-getPriceFxDetails
+        methods:
+          - GET
+        paths:
+          - /pricefxDetails$
+        strip_path: false
+      - tags: *a1
+        name: OrdersApi-postPriceFxDetails
+        methods:
+          - POST
+        paths:
+          - /pricefxDetails$
+        strip_path: false
+    tags: *a1
 
